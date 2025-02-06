@@ -1,0 +1,96 @@
+import requests
+from selectolax.parser import HTMLParser
+
+class PyArchiveBox:
+    def __init__(self, username: str, password: str, archivebox_version: str, archivebox_url: str):
+        self.username = username
+        self.password = password
+        self.archivebox_version = archivebox_version
+        self.url = archivebox_url
+        self.session = requests.Session()
+        
+        # declare empty variables in __init__ for clarity
+        self.csrf_token = None
+        self.session_cookie = None
+
+
+    def login(self):
+        login_url = self.url + "/admin/login/?next=/"
+
+        session = self.session
+
+        session.get(login_url)
+        if "csrftoken" in session.cookies:
+            self.csrf_token = session.cookies["csrftoken"]
+        elif "csrf" in session.cookies:
+            self.csrf_token = session.cookies["csrf"]
+        else:
+            print("no csrf cookie found")
+
+        payload = {
+            "csrfmiddlewaretoken": self.csrf_token,
+            "username": self.username,
+            "password": self.password
+        }
+
+        response = session.post(login_url, data=payload, allow_redirects=True)
+
+        if response.status_code == 200:
+            self.session_cookie = session.cookies.get("sessionid")
+
+        return response
+    
+    def add(self, url: str, tag: str = "", archive_methods: list = [], parser: str = "auto", depth: int = 0):
+        add_url = self.url + "/add/"
+
+        session = self.session
+
+        if depth > 1:
+            return "cannot have depth over 1"
+        else:
+            payload = {
+                "csrfmiddlewaretoken": self.csrf_token,
+                "url": url,
+                "parser": parser,
+                "tag": tag,
+                "depth": depth
+            }
+
+            if archive_methods != []:
+                payload["archive_methods"] = archive_methods
+
+        headers = {
+            "Cookie": f"csrftoken={self.csrf_token}; sessionid={self.session_cookie}; GMT_OFFSET=60"
+        }
+
+        session.post(add_url, data=payload, headers=headers, allow_redirects=True)
+    
+
+    def delete(self, title: str, date_added: str):
+        session = self.session
+        snapshots_url = self.url + "/admin/core/snapshot/"
+
+        headers = {
+            "Cookie": f"csrftoken={self.csrf_token}; sessionid={self.session_cookie}"
+        }
+        page = session.get(snapshots_url, headers=headers)
+        html = HTMLParser(page.text)
+
+        for row in html.css("tbody tr"):
+            checkbox = row.css_first("td.action-checkbox input[name='_selected_action']")
+            archive_id = checkbox.attributes["value"] if checkbox else None
+
+            archive_title = row.css_first("td.field-title_str").text(strip=True) if row.css_first("td.field-title_str") else None
+            archive_date = row.css_first("td.field-added").text(strip=True) if row.css_first("td.field-added") else None
+
+            if archive_id and archive_title and archive_date:
+                if archive_title == title and archive_date == date_added:
+                    payload = {
+                        "csrfmiddlewaretoken": f"{self.csrf_token}",
+                        "action": "delete_snapshots",
+                        "select_across": 0,
+                        "index": 0,
+                        "_selected_action": f"{archive_id}"
+                    }
+                    response = session.post(snapshots_url, headers=headers)
+                    return response
