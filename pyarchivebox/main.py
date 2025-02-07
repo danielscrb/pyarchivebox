@@ -125,7 +125,7 @@ class PyArchiveBox:
     
 
     def re_snapshot(self, title: str, date_added: str):
-        session= self.session
+        session = self.session
         snapshots_url = self.url + f"/admin/core/snapshot/?q={title}"
         archive_id = self.__get_archiveid(title, date_added)
 
