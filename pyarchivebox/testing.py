@@ -1,6 +1,6 @@
 from main import PyArchiveBox
 
-archivebox = PyArchiveBox("admin", "developementpassword", "0.7.6", "http://localhost:8000")
+archivebox = PyArchiveBox("admin", "developementpassword", "http://localhost:8000")
 
 archivebox.login()
 archivebox.add("https://www.youtube.com/watch?v=M31DhtoNh9w", "youtube1, youtube", ["media", "title"])

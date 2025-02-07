@@ -2,10 +2,9 @@ import requests
 from selectolax.parser import HTMLParser
 
 class PyArchiveBox:
-    def __init__(self, username: str, password: str, archivebox_version: str, archivebox_url: str):
+    def __init__(self, username: str, password: str, archivebox_url: str):
         self.username = username
         self.password = password
-        self.archivebox_version = archivebox_version
         self.url = archivebox_url
         self.session = requests.Session()
         
