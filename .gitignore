@@ -1,2 +1,4 @@
 .venv/
 pyarchivebox/__pycache__/
+pyarchivebox.egg-info/
+build/
