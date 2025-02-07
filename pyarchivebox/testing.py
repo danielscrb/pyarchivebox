@@ -18,4 +18,8 @@ title = input("insert the title of the archive you want to pull: ")
 date = input("insert the date of the archive you want to pull (exactly how you find it in archivebox): ")
 response = archivebox.pull(title, date)
 
+title = input("insert the title of the archive you want to re-snapshot: ")
+date = input("insert the date of the archive you want to re-snapshot (exactly how you find it in archivebox): ")
+response = archivebox.re_snapshot(title, date)
+
 print("test finished")

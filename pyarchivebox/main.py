@@ -122,3 +122,22 @@ class PyArchiveBox:
         }
         response = session.post(snapshots_url, data=payload, headers=headers)
         return response
+    
+
+    def re_snapshot(self, title: str, date_added: str):
+        session= self.session
+        snapshots_url = self.url + f"/admin/core/snapshot/?q={title}"
+        archive_id = self.__get_archiveid(title, date_added)
+
+        headers = {
+            "Cookie": f"csrftoken={self.csrf_token}; sessionid={self.session_cookie}; GMT_OFFSET=60"
+        }
+        payload = {
+            "csrfmiddlewaretoken": f"{self.csrf_token}",
+            "action": "resnapshot_snapshot",
+            "select_across": 0,
+            "index": 0,
+            "_selected_action": f"{archive_id}"
+        }
+        response = session.post(snapshots_url, data=payload, headers=headers)
+        return response
