@@ -13,3 +13,9 @@ archivebox.add("https://youtu.be/xJzW9-j3BB0?si=4HiO1_lrfazfQ6DN", "youtube", ["
 title = input("insert the title of the archive you want to delete: ")
 date = input("insert the date of the archive you want to delete (exactly how you find it in archivebox): ")
 response = archivebox.delete(title, date)
+
+title = input("insert the title of the archive you want to pull: ")
+date = input("insert the date of the archive you want to pull (exactly how you find it in archivebox): ")
+response = archivebox.pull(title, date)
+
+print("test finished")
