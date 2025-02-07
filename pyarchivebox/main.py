@@ -68,7 +68,7 @@ class PyArchiveBox:
 
     def delete(self, title: str, date_added: str):
         session = self.session
-        snapshots_url = self.url + "/admin/core/snapshot/"
+        snapshots_url = self.url + f"/admin/core/snapshot/?q={title}"
 
         headers = {
             "Cookie": f"csrftoken={self.csrf_token}; sessionid={self.session_cookie}; GMT_OFFSET=60"
