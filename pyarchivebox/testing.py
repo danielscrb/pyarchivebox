@@ -1,7 +1,3 @@
-"""
-I didn't yet find out a way to do unit tests on this project as I have to manually verify via the web interface things like if a url was successfully archived ecc...
-"""
-
 from main import PyArchiveBox
 
 archivebox = PyArchiveBox("admin", "developementpassword", "0.7.6", "http://localhost:8000")
