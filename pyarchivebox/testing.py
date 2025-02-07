@@ -22,4 +22,8 @@ title = input("insert the title of the archive you want to re-snapshot: ")
 date = input("insert the date of the archive you want to re-snapshot (exactly how you find it in archivebox): ")
 response = archivebox.re_snapshot(title, date)
 
+title = input("insert the title of the archive you want to reset: ")
+date = input("insert the date of the archive you want to reset (exactly how you find it in archivebox): ")
+response = archivebox.reset(title, date)
+
 print("test finished")
