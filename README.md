@@ -1,5 +1,5 @@
 # pyarchivebox
-This package simplifies the process of accessing you archivebox instance trough python.  
+This package simplifies the process of accessing your archivebox instance trough python.  
 It allows you to access your server on version before 0.8.0 where there is no official REST API.
 
 ## Docs
