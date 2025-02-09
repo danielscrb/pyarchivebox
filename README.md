@@ -1,6 +1,9 @@
 # pyarchivebox
 This package simplifies the process of accessing you archivebox instance trough python.  
-It allows you to access your server on version before 0.8.0 where there is no official REST API.  
+It allows you to access your server on version before 0.8.0 where there is no official REST API.
+
+## Docs
+You can find the docs on [ReadTheDocs](https://pyarchivebox.readthedocs.io/en/latest/index.html)
 
 ## Quick start
 To use the package just install the package using `pip`:
