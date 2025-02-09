@@ -193,3 +193,8 @@ class PyArchiveBox:
         }
         response = session.post(snapshots_url, data=payload, headers=headers)
         return response
+    
+
+    def get_latest(self):
+        latest = self.__get_latest_archives()
+        return latest

@@ -22,4 +22,7 @@ title = input("insert the title of the archive you want to reset: ")
 date = input("insert the date of the archive you want to reset (exactly how you find it in archivebox): ")
 response = archivebox.reset(title, date)
 
+latest = archivebox.get_latest()
+print(latest[0])
+
 print("test finished")
