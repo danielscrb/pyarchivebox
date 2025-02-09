@@ -18,7 +18,13 @@ Then make an object of the class containing your login info and server ip/domain
 archivebox = PyArchiveBox("admin", "developementpassword", "http://localhost:8000")
 ```
 
-and you can start using all the package's methods.
+Then you have to obtain a session cookie and a csrf token using the login method:
+
+```python
+archivebox.login()
+```
+
+and you can start using all the package in your project.
 
 ## Contributing
 All contributions, even small ones like correcting a typo, are welcome. Just make a pull request.
