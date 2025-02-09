@@ -26,7 +26,7 @@ class PyArchiveBox:
             checkbox = row.css_first("td.action-checkbox input[name='_selected_action']")
             archive_id = checkbox.attributes["value"] if checkbox else None
 
-            archive_title = row.css_first("td.field-title_str .status-fetched").text(strip=True) if row.css_first("td.field-title_str") else None
+            archive_title = row.css_first("td.field-title_str .status-fetched").text(strip=True) if row.css_first("td.field-title_str .status-fetched") else None
             archive_date = row.css_first("th.field-added").text(strip=True) if row.css_first("th.field-added") else None
 
             if archive_id and archive_title and archive_date:
