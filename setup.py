@@ -14,7 +14,7 @@ setup(
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Intended Audience :: Developers",
-        "Operating System :: OS independent"
+        "Operating System :: OS Independent"
     ],
     install_requires=[
         "requests>=2.32.3",
